@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iEq-7h-xGs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6xL-YA-KUu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -25,6 +25,57 @@
             </objects>
             <point key="canvasLocation" x="1043" y="110"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="e9S-lg-yD5">
+            <objects>
+                <viewController id="6xL-YA-KUu" customClass="SearchViewController" customModule="Custom_UISearchBar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bQ6-bP-QYf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="sXC-cI-swK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6xL-YA-KUu" id="zCh-ml-5WZ"/>
+                                </connections>
+                            </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VtJ-hG-Ti7">
+                                <rect key="frame" x="107" y="393" width="200" height="110"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MG5-Tg-M99">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="110"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1OR-xQ-rxy">
+                                        <rect key="frame" x="100" y="0.0" width="100" height="110"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="0xT-am-ncx"/>
+                                    <constraint firstAttribute="width" constant="200" id="Cob-AV-JBt"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GJM-vj-6PV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="VtJ-hG-Ti7" firstAttribute="centerY" secondItem="bQ6-bP-QYf" secondAttribute="centerY" id="2HE-xi-wuY"/>
+                            <constraint firstItem="sXC-cI-swK" firstAttribute="top" secondItem="GJM-vj-6PV" secondAttribute="top" id="Drj-VE-8M9"/>
+                            <constraint firstItem="VtJ-hG-Ti7" firstAttribute="centerX" secondItem="bQ6-bP-QYf" secondAttribute="centerX" id="Lt0-Sq-esV"/>
+                            <constraint firstItem="sXC-cI-swK" firstAttribute="trailing" secondItem="GJM-vj-6PV" secondAttribute="trailing" id="gwe-Xo-p2Z"/>
+                            <constraint firstItem="sXC-cI-swK" firstAttribute="leading" secondItem="GJM-vj-6PV" secondAttribute="leading" id="ob5-UJ-uOc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="sXC-cI-swK" id="9Is-Ue-Xu3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p2L-hs-ndq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042" y="810"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="UFl-0H-x6Y">
             <objects>
@@ -47,6 +98,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
