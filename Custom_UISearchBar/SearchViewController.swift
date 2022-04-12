@@ -14,6 +14,27 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     
+    /// 검색한 데이터를 정렬합니다.
+    func sortSearchData() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let sortByNameAction = UIAlertAction(title: "이름순", style: .default) { _ in
+            print("이름순으로 정렬합니다.")
+        }
+        alert.addAction(sortByNameAction)
+        
+        let sortByDateAction = UIAlertAction(title: "날짜순", style: .default) { _ in
+            print("날짜순으로 정렬합니다.")
+        }
+        alert.addAction(sortByDateAction)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     /// 초기화 작업을 실행합니다.
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +45,7 @@ class SearchViewController: UIViewController {
         }
         
         searchBar.placeholder = "검색어를 입력해주세요."
+        
     }
     
     
@@ -31,6 +53,9 @@ class SearchViewController: UIViewController {
     /// - Parameter animated: 애니메이션 사용 여부
     override func viewDidAppear(_ animated: Bool) {
         searchBar.changePlaceholderColor(.blue) // viewDidLoad에서 호출시 적용되지 않음
+        if let image = UIImage(named: "filter") {
+            searchBar.setRightImage(image)
+        }
     }
 }
 
@@ -57,7 +82,7 @@ extension UISearchBar {
 
     /// 서치바 안 텍스트 필드 왼쪽에 이미지를 추가합니다.
     /// - Parameters:
-    ///   - image: 넣을 이미지
+    ///   - image: 추가할 이미지
     ///   - padding: 왼쪽 여백
     ///
     ///   패딩이 0일 경우, 텍스트 필드에 패딩뷰는 추가하지 않고 이미지뷰만 추가합니다.
@@ -88,8 +113,8 @@ extension UISearchBar {
             textField?.leftView = imageView
         }
     }
-    
-    
+
+
     /// 서치바의 플레이스홀더 색상을 변경합니다.
     /// - Parameter color: 변경할 색상
     func changePlaceholderColor(_ color: UIColor) {
@@ -101,5 +126,93 @@ extension UISearchBar {
         for subview in field.subviews where subview.isKind(of: UISearchBarTextFieldLabel) {
             (subview as! UILabel).textColor = color
         }
+    }
+
+    
+    /// Activity Indicator
+    public var activityIndicator: UIActivityIndicatorView? {
+        return textField?.leftView?.subviews.compactMap { $0 as? UIActivityIndicatorView }.first
+    }
+    
+    
+    /// 로딩 플래그
+    var isLoading: Bool {
+        get {
+            return activityIndicator != nil
+        } set {
+            if newValue {
+                if activityIndicator == nil {
+                    let newActivityIndicator = UIActivityIndicatorView(style: .medium)
+                    newActivityIndicator.color = .gray
+                    newActivityIndicator.startAnimating()
+                    newActivityIndicator.backgroundColor = textField?.backgroundColor ?? .systemGray6
+                    textField?.leftView?.addSubview(newActivityIndicator)
+                    let leftViewSize = textField?.leftView?.frame.size ?? .zero
+                    newActivityIndicator.center = CGPoint(x: leftViewSize.width - newActivityIndicator.frame.width / 2, y: leftViewSize.height / 2)
+                }
+            } else {
+                activityIndicator?.removeFromSuperview()
+            }
+        }
+    }
+    
+    
+    /// 서치바 안 텍스트 필드 오른쪽에 이미지를 추가합니다.
+    /// - Parameter image: 추가할 이미지
+    func setRightImage(_ image: UIImage) {
+        showsBookmarkButton = true
+        if let btn = textField?.rightView as? UIButton {
+            btn.translatesAutoresizingMaskIntoConstraints = false // auto layout을 사용하여 크기와 위치를 동적으로 계산하려면, 이 프로퍼티를 false로 설정해야 한다.
+            btn.widthAnchor.constraint(equalToConstant: 20).isActive = true // 버튼 너비 제약
+            btn.heightAnchor.constraint(equalToConstant: 20).isActive = true // 버튼 높이 제약
+            
+            
+            btn.setImage(image, for: .normal)
+            btn.setImage(image.alpha(0.5), for: .highlighted)
+        }
+    }
+}
+
+
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    /// 검색 버튼을 클릭하면 Activity Indicator를 실행합니다.
+    /// - Parameter searchBar: 서치바
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.isLoading = true
+    }
+    
+    
+    /// 입력된 텍스트가 없으면 Acitivity Indicator를 종료합니다.
+    /// - Parameters:
+    ///   - searchBar: 서치바
+    ///   - searchText: 검색할 텍스트
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            searchBar.isLoading = false
+        }
+    }
+    
+    
+    /// 북마크 버튼이 탭되면 정렬 관련 액션시트를 띄웁니다.
+    /// - Parameter searchBar: 서치바
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        sortSearchData()
+    }
+}
+
+
+extension UIImage {
+    
+    /// 이미지의 alpha 값을 변경합니다.
+    /// - Parameter value: 적용할 alpha 값
+    /// - Returns: alpha 값이 적용된 이미지
+    func alpha(_ value:CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
 }
