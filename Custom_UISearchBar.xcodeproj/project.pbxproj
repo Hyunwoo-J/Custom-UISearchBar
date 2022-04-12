@@ -14,6 +14,8 @@
 		2CAE80502802D3960007AA37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CAE804F2802D3960007AA37 /* Assets.xcassets */; };
 		2CAE80532802D3960007AA37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CAE80512802D3960007AA37 /* LaunchScreen.storyboard */; };
 		2CAE805D280327840007AA37 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE805C280327840007AA37 /* SearchViewController.swift */; };
+		2CAE80602805592E0007AA37 /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE805F2805592E0007AA37 /* UISearchBar+Extension.swift */; };
+		2CAE80622805596C0007AA37 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAE80612805596C0007AA37 /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		2CAE80522802D3960007AA37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2CAE80542802D3960007AA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CAE805C280327840007AA37 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		2CAE805F2805592E0007AA37 /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
+		2CAE80612805596C0007AA37 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		2CAE80452802D3930007AA37 /* Custom_UISearchBar */ = {
 			isa = PBXGroup;
 			children = (
+				2CAE805E280558C30007AA37 /* Extension */,
 				2CAE80462802D3930007AA37 /* AppDelegate.swift */,
 				2CAE80482802D3930007AA37 /* SceneDelegate.swift */,
 				2CAE804A2802D3930007AA37 /* ViewController.swift */,
@@ -68,6 +73,15 @@
 				2CAE80542802D3960007AA37 /* Info.plist */,
 			);
 			path = Custom_UISearchBar;
+			sourceTree = "<group>";
+		};
+		2CAE805E280558C30007AA37 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2CAE805F2805592E0007AA37 /* UISearchBar+Extension.swift */,
+				2CAE80612805596C0007AA37 /* UIImage+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +156,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CAE804B2802D3930007AA37 /* ViewController.swift in Sources */,
+				2CAE80602805592E0007AA37 /* UISearchBar+Extension.swift in Sources */,
 				2CAE80472802D3930007AA37 /* AppDelegate.swift in Sources */,
+				2CAE80622805596C0007AA37 /* UIImage+Extension.swift in Sources */,
 				2CAE805D280327840007AA37 /* SearchViewController.swift in Sources */,
 				2CAE80492802D3930007AA37 /* SceneDelegate.swift in Sources */,
 			);
